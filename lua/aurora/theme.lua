@@ -59,14 +59,14 @@ function M.setup(colors, config)
 
   theme.comment = theme.bg3
 
-  theme.seiun   = colors.sakura['0']
-  theme.shinme  = colors.sakura['1']
+  theme.ike     = colors.ike['0']
+  theme.shinme  = colors.ike['2']
   theme.sakaeru = colors.sakura['2']
   theme.taiyo   = colors.sakura['3']
   theme.sakura  = colors.sakura['4']
-  theme.sukai   = colors.ike['0']
-  theme.sage    = colors.ike['1']
-  theme.ike     = colors.ike['2']
+  theme.sukai   = colors.kumo['0']
+  theme.sage    = colors.kumo['1']
+  theme.seiun   = colors.kumo['2']
 
   theme.syntax  = {
     keyword = theme.sakura,
