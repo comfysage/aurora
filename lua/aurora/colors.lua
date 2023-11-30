@@ -5,8 +5,8 @@
 
 ---@type AuroraColors
 _G.aurora_colors = {
-  bg0_hard    = { "#272838", 0 },
-  bg0         = { "#21202B", 0 },
+  bg0_hard    = { "#21202B", 0 },
+  bg0         = { "#2D2F3E", 0 },
   bg0_soft    = { "#2D2D42", 0 },
   bg1         = { "#323246", 8 },
   bg2         = { "#3E3D53", 8 },
