@@ -1,9 +1,14 @@
----@alias styleField 'search'
----@alias styleValue { reverse: boolean }
+---@class StyleConfig
+---@field tabline { reverse: boolean, color: AuroraColor }
+---@field search { reverse: boolean, inc_reverse: boolean }
+---@field types { italic: boolean }
+---@field keyword { italic: boolean }
+---@field comment { italic: boolean }
 
 ---@class AuroraTheme
 ---@field none Color
 ---@field colors AuroraColors
+---@field base { fg: Color, bg: Color }
 ---@field bg Color
 ---@field fg Color
 ---@field bg0 Color
@@ -21,9 +26,20 @@
 ---@field taiyo Color
 ---@field seiun   Color
 ---@field ike     Color
----@field syntax { keyword: Color, object: Color, type: Color, context: Color, constant: Color, call: Color }
----@field style { [styleField]: styleValue }
+---@field syntax AuroraSyntax
+---@field style StyleConfig
 ---@field comment Color
+
+---@class AuroraSyntax
+---@field keyword Color
+---@field object Color
+---@field type Color
+---@field context Color
+---@field constant Color
+---@field call Color
+---@field string Color
+---@field macro Color
+---@field annotation Color
 
 local M = {}
 
@@ -38,43 +54,48 @@ function M.setup(colors, config)
 
   theme.bg      = theme.none
   if not config.transparent_background then
-    theme.bg = colors.bg['0']
+    theme.bg = colors.bg0
     if config.contrast_dark == 'hard' then
-      theme.bg = colors.bg['0_hard']
+      theme.bg = colors.bg0_hard
     end
     if config.contrast_dark == 'soft' then
-      theme.bg = colors.bg['0_soft']
+      theme.bg = colors.bg0_soft
     end
   end
-  theme.fg      = colors.fg['0']
+  theme.base    = { fg = colors.bg0, bg = theme.bg }
+  theme.fg      = colors.fg0
 
-  theme.bg0     = colors.bg['0']
-  theme.bg1     = colors.bg['1']
-  theme.bg2     = colors.bg['2']
-  theme.bg3     = colors.bg['3']
+  theme.bg0     = colors.bg0
+  theme.bg1     = colors.bg1
+  theme.bg2     = colors.bg2
+  theme.bg3     = colors.bg3
 
-  theme.fg0     = colors.fg['0']
-  theme.fg1     = colors.fg['1']
-  theme.fg2     = colors.fg['2']
+  theme.fg0     = colors.fg1
+  theme.fg1     = colors.fg0
+  theme.fg2     = colors.fg2
 
-  theme.comment = theme.bg3
+  theme.comment = theme.fg2
 
-  theme.ike     = colors.ike['0']
-  theme.shinme  = colors.ike['2']
-  theme.sakura  = colors.sakura['0']
-  theme.sakaeru = colors.sakura['2']
-  theme.taiyo   = colors.sakura['3']
-  theme.sukai   = colors.kumo['0']
-  theme.sage    = colors.kumo['1']
-  theme.seiun   = colors.kumo['2']
+  theme.ike     = colors.aqua
+  theme.shinme  = colors.green
+  theme.sakura  = colors.red
+  theme.taiyo   = colors.orange
+  theme.sakaeru = colors.yellow
+  theme.sukai   = colors.blue
+  theme.sage    = colors.aqua
+  theme.seiun   = colors.purple
+  theme.pink    = colors.pink
 
   theme.syntax  = {
     keyword = theme.sakura,
     object = theme.fg1,
-    type = theme.sage,
-    context = theme.bg3,
-    constant = theme.seiun,
-    call = theme.ike,
+    type = theme.taiyo,
+    context = theme.fg0,
+    constant = theme.pink,
+    call = theme.sukai,
+    string = theme.shinme,
+    macro = theme.taiyo,
+    annotation = theme.sakura,
   }
 
   theme.style = {

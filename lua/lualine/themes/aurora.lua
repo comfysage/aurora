@@ -2,12 +2,16 @@ local theme = require 'aurora.colors'.setup {}
 
 local colors = {
   normal = theme.syntax.constant[1],
-  insert = theme.ike[1],
-  visual = theme.syntax.object[1],
+  insert = theme.syntax.call[1],
+  visual = theme.syntax.type[1],
 
   fg0 = theme.fg0[1],
   fg1 = theme.fg1[1],
-  bg0 = theme.bg[1],
+  fg2 = theme.fg2[1],
+  base = {
+    fg = theme.base.fg[1],
+    bg = theme.base.bg[1],
+  },
   bg1 = theme.bg1[1],
   bg2 = theme.bg2[1],
 }
@@ -15,29 +19,29 @@ local colors = {
 local aurora = {}
 
 aurora.normal = {
-  a = { fg = colors.bg0, bg = colors.normal },
-  b = { bg = colors.bg0, fg = colors.normal },
-  c = { bg = colors.bg1, fg = colors.fg0 },
+  a = { fg = colors.base.fg, bg = colors.normal },
+  b = { bg = colors.bg1, fg = colors.normal },
+  c = { bg = colors.base.fg, fg = colors.fg2 },
 }
 
 aurora.insert = {
-  a = { fg = colors.bg0, bg = colors.insert },
-  b = { bg = colors.bg0, fg = colors.insert },
+  a = { fg = colors.base.fg, bg = colors.insert },
+  b = { bg = colors.bg1, fg = colors.insert },
 }
 
 aurora.command = aurora.normal
 
 aurora.visual = {
-  a = { fg = colors.bg0, bg = colors.visual },
-  b = { bg = colors.bg0, fg = colors.visual },
+  a = { fg = colors.base.fg, bg = colors.visual },
+  b = { bg = colors.bg1, fg = colors.visual },
 }
 
 aurora.replace = aurora.insert
 
 aurora.inactive = {
-  a = { bg = colors.bg1, fg = colors.fg1 },
-  b = { bg = colors.bg1, fg = colors.fg1 },
-  c = { bg = colors.bg1, fg = colors.fg1 },
+  a = { bg = colors.base.bg, fg = colors.fg2 },
+  b = { bg = colors.base.bg, fg = colors.fg2 },
+  c = { bg = colors.base.bg, fg = colors.fg2 },
 }
 
 return aurora

@@ -1,36 +1,39 @@
 local M = {}
 
 ---@alias ColorSpec { [1]: Color, [2]: Color, link: string, reverse: boolean }
+---@alias HLGroups { [string]: ColorSpec }
 
 ---@param theme AuroraTheme
 ---@param config AuroraConfig
 function M.setup(theme, config)
-  ---@type { [string]: ColorSpec }
+  ---@type HLGroups
   local hl_groups = {
     Normal = { theme.fg, theme.bg },
     Statement = { theme.syntax.keyword },
+    Keyword = { theme.syntax.keyword, italic = config.style.keyword.italic },
     Identifier = { theme.syntax.object },
-    Type = { theme.syntax.type },
+    Type = { theme.syntax.type, italic = config.style.types.italic },
     Function = { theme.syntax.call },
-    Structure = { theme.ike },
+    Structure = { theme.syntax.type },
 
-    Comment = { theme.comment },
+    Comment = { theme.comment, italic = config.style.comment.italic },
 
     Special = { theme.syntax.context },
     Delimiter = { theme.syntax.context },
     Operator = { theme.syntax.context },
-    MatchParen = { theme.sukai },
+    MatchParen = { theme.taiyo },
 
     Constant = { theme.syntax.constant },
-    String = { theme.shinme },
+    String = { theme.syntax.string },
 
     Cursor = { theme.sakaeru },
+    CursorLine = { theme.none, theme.bg1 },
 
     LineNr = { theme.bg2 },
     CursorLineNr = { theme.comment },
     SignColumn = { theme.none, theme.bg },
     VertSplit = { theme.bg2 },
-    TabLineSel = { theme.bg, theme.seiun },
+    TabLineSel = config.style.tabline.reverse and { theme.base.fg, theme.colors[config.style.tabline.color] } or { theme.colors[config.style.tabline.color], theme.base.bg },
     TabLine = { theme.comment, theme.bg },
     TabLineFill = { link = 'TabLine' },
     Title = { theme.comment },
@@ -38,7 +41,8 @@ function M.setup(theme, config)
     Folded = { theme.comment },
     FoldColumn = { theme.bg1 },
 
-    Search = { theme.taiyo },
+    Search = { theme.taiyo, reverse = config.style.search.reverse },
+    IncSearch = { theme.taiyo, reverse = config.style.search.inc_reverse },
 
     Error = { theme.sakura },
     ErrorMsg = { link = "Error" },
@@ -48,11 +52,12 @@ function M.setup(theme, config)
 
     ColorColumn = { theme.none, theme.bg1 },
 
-    Todo = { theme.bg, theme.seiun },
+    Todo = { theme.base.fg, theme.seiun },
 
-    PreProc = { theme.sukai },
+    PreProc = { theme.syntax.annotation },
+    Include = { theme.syntax.annotation },
 
-    Directory = { link = "Constant" },
+    Directory = { theme.colors.grey1 },
 
     Underlined = { theme.none, theme.none },
 
@@ -78,12 +83,12 @@ function M.setup(theme, config)
     TSField              = { theme.syntax.object },
     TSFloat              = { link = "Float" },
     TSFuncBuiltin        = { link = "Constant" },
-    TSFuncMacro          = { link = "Constant" },
+    TSFuncMacro          = { theme.syntax.macro },
     TSFunction           = { link = "Function" },
     TSInclude            = { link = "Include" },
     TSKeyword            = { link = "Keyword" },
     TSKeywordFunction    = { link = "Keyword" },
-    TSKeywordOperator    = { theme.taiyo },
+    TSKeywordOperator    = { theme.syntax.context },
     TSLabel              = { link = "Label" },
     TSMethod             = { theme.syntax.context },
     TSNamespace          = { link = "Constant" },
@@ -146,6 +151,7 @@ function M.setup(theme, config)
     DiagnosticWarn                       = { link = "AdachiYellowDark" },
     DiagnosticInfo                       = { link = "AdachiAquaDark" }, ]]
     -- DiagnosticHint                       = { link = "AdachiAquaDark" },
+    DiagnosticOk = { theme.shinme },
     DiagnosticError = { theme.sakura },
     DiagnosticWarn = { theme.sakaeru },
     DiagnosticInfo = { theme.sage },
@@ -258,13 +264,27 @@ function M.setup(theme, config)
   hl_groups['@constructor.lua'] = { theme.syntax.context }
 
   hl_groups['@lsp.type.namespace'] = { link = "TSNamespace" }
+  hl_groups['@lsp.type.keyword.lua'] = { link = "TSKeyword" }
 
   hl_groups['@tag.html'] = { theme.syntax.keyword }
   hl_groups['@tag.delimiter.html'] = { theme.syntax.context }
   hl_groups['@tag.attribute.html'] = { theme.fg0 }
   hl_groups['@string.html'] = { theme.sukai }
 
-  hl_groups['@lsp.type.macro.rust'] = { theme.syntax.call }
+  hl_groups['@lsp.type.macro.rust'] = { theme.syntax.macro }
+
+  -- fix lsp hover doc
+  hl_groups['@none.markdown'] = { theme.none, theme.none }
+  hl_groups['@text.emphasis'] = { theme.taiyo, italic = true }
+
+  -- hl_groups['@include.typescript'] = { theme.syntax.keyword }
+
+  hl_groups['markdownH1'] = { theme.seiun }
+  hl_groups['markdownH2'] = { theme.taiyo }
+  hl_groups['markdownH3'] = { theme.shinme }
+  hl_groups['markdownH4'] = { link = "markdownH1" }
+  hl_groups['markdownH5'] = { link = "markdownH2" }
+  hl_groups['markdownH6'] = { link = "markdownH3" }
 
   -- Telescope
   hl_groups['TelescopeMatching']       = { link = "Search" }
@@ -283,6 +303,59 @@ function M.setup(theme, config)
   hl_groups['GitGutterChange'] = { link = "DiffChange" }
   hl_groups['GitGutterDelete'] = { link = "DiffDelete" }
   hl_groups['GitGutterChangeDelete'] = { link = 'GitGutterChange' }
+
+  -- Cmp
+  hl_groups['CmpItemMenu'] = { theme.syntax.constant, italic = true }
+
+  hl_groups['CmpItemKindText']  = { theme.fg1 }
+  hl_groups['CmpItemKindMethod']  = { theme.syntax.constant }
+  hl_groups['CmpItemKindFunction']  = { theme.syntax.call }
+  hl_groups['CmpItemKindConstructor']  = { theme.syntax.type }
+  hl_groups['CmpItemKindField']  = { theme.syntax.object }
+  hl_groups['CmpItemKindVariable']  = { theme.syntax.object }
+  hl_groups['CmpItemKindClass']  = { theme.syntax.type }
+  hl_groups['CmpItemKindInterface']  = { theme.syntax.type }
+  hl_groups['CmpItemKindModule']  = { theme.syntax.keyword }
+  hl_groups['CmpItemKindProperty']  = { theme.syntax.keyword }
+  hl_groups['CmpItemKindUnit']  = { theme.syntax.constant }
+  hl_groups['CmpItemKindValue']  = { theme.syntax.constant }
+  hl_groups['CmpItemKindEnum']  = { theme.syntax.constant }
+  hl_groups['CmpItemKindKeyword']  = { theme.syntax.keyword }
+  hl_groups['CmpItemKindSnippet']  = { theme.syntax.macro }
+  hl_groups['CmpItemKindColor']  = { theme.syntax.constant }
+  hl_groups['CmpItemKindFile']  = { theme.syntax.type }
+  hl_groups['CmpItemKindReference']  = { theme.fg1 }
+  hl_groups['CmpItemKindFolder']  = { theme.syntax.type }
+  hl_groups['CmpItemKindEnumMember']  = { theme.syntax.constant }
+  hl_groups['CmpItemKindConstant']  = { theme.syntax.constant }
+  hl_groups['CmpItemKindStruct']  = { theme.syntax.type }
+  hl_groups['CmpItemKindEvent']  = { theme.syntax.keyword }
+  hl_groups['CmpItemKindOperator']  = { link = "Operator" }
+  hl_groups['CmpItemKindTypeParameter']  = { theme.syntax.type }
+
+  hl_groups['CmpItemAbbrDeprecated'] = { link = "Comment" }
+
+  hl_groups['CmpItemAbbrMatch']      = { link = "Search" }
+  hl_groups['CmpItemAbbrMatchFuzzy'] = { link = "CmpItemAbbrMatch" }
+
+  -- lukas-reineke/indent-blankline.nvim
+  hl_groups['IndentBlanklineIndent1'] = { theme.bg2, nocombine = true }
+  hl_groups['IndentBlanklineIndent2'] = { theme.colors.red, nocombine = true }
+  hl_groups['IndentBlanklineIndent3'] = { theme.bg2, nocombine = true }
+  hl_groups['IndentBlanklineIndent4'] = { theme.colors.orange, nocombine = true }
+  hl_groups['IndentBlanklineIndent3'] = { theme.bg2, nocombine = true }
+  hl_groups['IndentBlanklineIndent4'] = { theme.colors.yellow, nocombine = true }
+  hl_groups['IndentBlanklineIndent5'] = { theme.bg2, nocombine = true }
+  hl_groups['IndentBlanklineIndent6'] = { theme.colors.green, nocombine = true }
+  hl_groups['IndentBlanklineIndent7'] = { theme.bg2, nocombine = true }
+  hl_groups['IndentBlanklineIndent8'] = { theme.colors.aqua, nocombine = true }
+  hl_groups['IndentBlanklineIndent9'] = { theme.bg2, nocombine = true }
+  hl_groups['IndentBlanklineIndent10'] = { theme.colors.blue, nocombine = true }
+  hl_groups['IndentBlanklineIndent11'] = { theme.bg2, nocombine = true }
+  hl_groups['IndentBlanklineIndent12'] = { theme.colors.purple, nocombine = true }
+
+  -- simrat39/symbols-outline.nvim
+  hl_groups['FocusedSymbol'] = { theme.syntax.call }
 
   if config.override_terminal then
     require 'aurora.hl.terminal'(theme, theme.colors)

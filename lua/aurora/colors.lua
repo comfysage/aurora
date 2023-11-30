@@ -1,52 +1,29 @@
 ---@class Color { [1]: string, [2]: number }
 
----@alias NeutralColor '0_hard' | '0' | '0_soft' | '1' | '2' | '3' | '4'
----@alias NeutralColors { [NeutralColor]: Color }
-
----@alias AccentColor '0' | '1' | '2' | '3'
----@alias AccentColors { [AccentColor]: Color }
-
----@class AuroraColors
----@field bg NeutralColors
----@field fg NeutralColors
----@field sakura AccentColors
----@field ike AccentColors
----@field kumo AccentColors
+---@alias AuroraColor 'bg0_hard'|'bg0_soft'|'bg0'|'bg1'|'bg2'|'bg3'|'bg4'|'bg5'|'bg_visual'|'bg_red'|'bg_green'|'bg_blue'|'bg_yellow'|'fg0'|'fg1'|'fg2'|'red'|'orange'|'yellow'|'green'|'aqua'|'blue'|'purple'|'pink'
+---@alias AuroraColors { [AuroraColor]: Color }
 
 ---@type AuroraColors
 _G.aurora_colors = {
-  bg = {
-    ['0_hard'] = { '#273038', 232 },
-    ['0']      = { '#2B333D', 0 },
-    ['0_soft'] = { '#2D3742', 232 },
-    ['0_dark'] = { '#1D1D28', 232 },
-    ['1']      = { '#353D4A', 0 },
-    ['2']      = { '#3F4755', 0 },
-    ['3']      = { '#454E5D', 0 },
-  },
-  fg = {
-    ['0'] = { '#F8EEE4', 0 },
-    ['1'] = { '#F5EADD', 0 },
-    ['2'] = { '#EEE3D4', 0 },
-  },
-  sakura = {
-    ['0'] = { '#DC7276', 0 },
-    ['1'] = { '#AB555F', 0 },
-    ['2'] = { '#FCC588', 0 },
-    ['3'] = { '#E58D79', 0 },
-  },
-  ike = {
-    ['0'] = { '#72AA8F', 0 },
-    ['1'] = { '#83B78A', 0 },
-    ['2'] = { '#B1C699', 0 },
-    ['3'] = { '#CFCBA5', 0 },
-  },
-  kumo = {
-    ['0'] = { '#9BBDCC', 0 },
-    ['1'] = { '#7C94C1', 0 },
-    ['2'] = { '#AFAAE0', 0 },
-    ['3'] = { '#7C71B3', 0 },
-  },
+  bg0_hard    = { "#272838", 0 },
+  bg0         = { "#21202B", 0 },
+  bg0_soft    = { "#2D2D42", 0 },
+  bg1         = { "#323246", 8 },
+  bg2         = { "#3E3D53", 8 },
+  bg3         = { "#47455D", 8 },
+  bg4         = { "#4F4D67", 8 },
+  bg5         = { "#5B5977", 8 },
+  fg0         = { "#F8EEE4", 7 },
+  fg1         = { "#9396B5", 7 },
+  fg2         = { "#6C6D89", 7 },
+  red         = { "#E57E80", 1 },
+  orange      = { "#F09C7D", 11 },
+  yellow      = { "#FCC588", 3 },
+  green       = { "#C0D6A6", 2 },
+  aqua        = { "#A3D6B2", 6 },
+  blue        = { "#C9CBFF", 4 },
+  purple      = { "#C69FF5", 5 },
+  pink        = { "#DDB6F2", 5 },
 }
 
 local M = {}
