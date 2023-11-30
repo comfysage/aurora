@@ -13,7 +13,7 @@ aurora.default_config = {
     contrast_dark = 'medium',
     override_terminal = true,
     style = {
-        tabline = { reverse = true, color = 'green' },
+        tabline = { reverse = true, color = 'blue' },
         search = { reverse = false, inc_reverse = true },
         types = { italic = true },
         keyword = { italic = true },
