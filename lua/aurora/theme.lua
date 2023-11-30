@@ -1,9 +1,16 @@
 ---@class StyleConfig
 ---@field tabline { reverse: boolean, color: AuroraColor }
 ---@field search { reverse: boolean, inc_reverse: boolean }
----@field types { italic: boolean }
----@field keyword { italic: boolean }
+---@field types { italic: boolean, color: AuroraColor }
+---@field keyword { italic: boolean, color: AuroraColor }
 ---@field comment { italic: boolean }
+---@field object { color: AuroraColor }
+---@field context { color: AuroraColor }
+---@field constant { color: AuroraColor }
+---@field call { color: AuroraColor }
+---@field string { color: AuroraColor }
+---@field macro { color: AuroraColor }
+---@field annotation { color: AuroraColor }
 
 ---@class AuroraTheme
 ---@field none Color
@@ -87,15 +94,15 @@ function M.setup(colors, config)
   theme.pink    = colors.pink
 
   theme.syntax  = {
-    keyword = theme.sakura,
-    object = theme.fg1,
-    type = theme.taiyo,
-    context = theme.fg0,
-    constant = theme.pink,
-    call = theme.sukai,
-    string = theme.shinme,
-    macro = theme.taiyo,
-    annotation = theme.sakura,
+    keyword    = colors[config.style.keyword.color or 0] or theme.sakura,
+    object     = colors[config.style.object.color or 0] or theme.fg1,
+    type       = colors[config.style.types.color or 0] or theme.taiyo,
+    context    = colors[config.style.context.color or 0] or theme.fg0,
+    constant   = colors[config.style.constant.color or 0] or theme.pink,
+    call       = colors[config.style.call.color or 0] or theme.sukai,
+    string     = colors[config.style.string.color or 0] or theme.shinme,
+    macro      = colors[config.style.macro.color or 0] or theme.taiyo,
+    annotation = colors[config.style.annotation.color or 0] or theme.sakura,
   }
 
   theme.style = {
