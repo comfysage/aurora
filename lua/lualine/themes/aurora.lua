@@ -20,20 +20,20 @@ local aurora = {}
 
 aurora.normal = {
   a = { fg = colors.base.fg, bg = colors.normal },
-  b = { bg = colors.bg1, fg = colors.normal },
-  c = { bg = colors.base.fg, fg = colors.fg2 },
+  b = { bg = colors.bg2, fg = colors.normal },
+  c = { bg = colors.base.bg, fg = colors.fg2 },
 }
 
 aurora.insert = {
   a = { fg = colors.base.fg, bg = colors.insert },
-  b = { bg = colors.bg1, fg = colors.insert },
+  b = { bg = colors.bg2, fg = colors.insert },
 }
 
 aurora.command = aurora.normal
 
 aurora.visual = {
   a = { fg = colors.base.fg, bg = colors.visual },
-  b = { bg = colors.bg1, fg = colors.visual },
+  b = { bg = colors.bg2, fg = colors.visual },
 }
 
 aurora.replace = aurora.insert
