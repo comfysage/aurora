@@ -1,3 +1,5 @@
+![preview](images/preview-rust__data.png)
+
 Aurora is a warm neovim colorscheme for cozy morning coding.
 
 Aurora is inspired by the [Nord colorscheme](https://www.nordtheme.com).
@@ -53,6 +55,8 @@ require 'aurora'.setup {
 
   [gitgutter]: https://github.com/airblade/vim-gitgutter
   [telescope]: https://github.com/nvim-telescope/telescope
+
+![telescope preview](images/preview-telescope__files.png)
 
 ## License
 
