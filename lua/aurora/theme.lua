@@ -34,6 +34,7 @@
 ---@field seiun   Color
 ---@field ike     Color
 ---@field syntax AuroraSyntax
+---@field diff { ['add'|'delete'|'change']: Color }
 ---@field style StyleConfig
 ---@field sign Color
 ---@field comment Color
@@ -108,6 +109,11 @@ function M.setup(colors, config)
     string     = colors[config.style.string.color or 0] or theme.shinme,
     macro      = colors[config.style.macro.color or 0] or theme.taiyo,
     annotation = colors[config.style.annotation.color or 0] or theme.sakura,
+  }
+  theme.diff = {
+    add = theme.shinme,
+    delete = theme.sakura,
+    change = theme.sage,
   }
 
   theme.style = {
