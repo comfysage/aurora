@@ -34,6 +34,7 @@
 ---@field seiun   Color
 ---@field ike     Color
 ---@field syntax AuroraSyntax
+---@field diagnostic { ['ok'|'error'|'warn'|'info'|'hint']: Color }
 ---@field diff { ['add'|'delete'|'change']: Color }
 ---@field style StyleConfig
 ---@field sign Color
@@ -109,6 +110,13 @@ function M.setup(colors, config)
     string     = colors[config.style.string.color or 0] or theme.shinme,
     macro      = colors[config.style.macro.color or 0] or theme.taiyo,
     annotation = colors[config.style.annotation.color or 0] or theme.sakura,
+  }
+  theme.diagnostic = {
+    ok = theme.shinme,
+    error = theme.sakura,
+    warn = theme.sakaeru,
+    info = theme.sage,
+    hint = theme.sukai,
   }
   theme.diff = {
     add = theme.shinme,
