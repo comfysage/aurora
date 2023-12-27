@@ -145,16 +145,16 @@ function M.setup(theme, config)
     PmenuThumb              = { theme.none, theme.fg2 },
 
     -- Diffs
-    DiffDelete              = { theme.sakura, theme.bg },
-    DiffAdd                 = { theme.shinme, theme.bg },
-    DiffChange              = { theme.ike, theme.bg },
-    DiffText                = { theme.fg, theme.bg },
-    diffAdded               = { link = 'DiffAdd' },
-    diffRemoved             = { link = 'DiffDelete' },
-    diffChanged             = { link = 'DiffChange' },
-    diffFile                = { theme.syntax.object },
-    diffNewFile             = { theme.syntax.object },
-    diffLine                = { theme.syntax.context },
+    DiffAdd    = { theme.diff.add,    theme.bg },
+    DiffDelete = { theme.diff.delete, theme.bg },
+    DiffChange = { theme.diff.change, theme.bg },
+    DiffText   = { theme.fg0, theme.bg },
+    diffAdded   = { theme.diff.add    },
+    diffRemoved = { theme.diff.delete },
+    diffChanged = { theme.diff.change },
+    diffFile    = { theme.syntax.object },
+    diffNewFile = { theme.syntax.object },
+    diffLine    = { theme.syntax.context },
 
     -- Spell
     SpellCap                = { theme.shinme },
