@@ -76,7 +76,7 @@ function M.setup(theme, config)
     PreProc = { theme.syntax.annotation },
     Include = { theme.syntax.annotation },
 
-    Directory = { theme.colors.grey1 },
+    Directory = { theme.fg0 },
 
     Underlined = { theme.none, theme.none },
 
