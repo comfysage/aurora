@@ -35,6 +35,7 @@
 ---@field ike     Color
 ---@field syntax AuroraSyntax
 ---@field style StyleConfig
+---@field sign Color
 ---@field comment Color
 ---@field bg_accent Color
 
@@ -83,6 +84,8 @@ function M.setup(colors, config)
   theme.fg2     = colors.fg2
 
   theme.comment = theme.fg2
+  local sign_colors = { soft = theme.bg3 }
+  theme.sign      = sign_colors[config.contrast_dark] or theme.none
   theme.bg_accent = theme.bg2
 
   theme.ike     = colors.aqua
