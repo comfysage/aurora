@@ -77,6 +77,7 @@ function M.setup(theme, config)
     Include = { theme.syntax.annotation },
 
     Directory = { theme.fg0 },
+    Question = { theme.fg0 },
 
     Underlined = { theme.none, theme.none },
 
