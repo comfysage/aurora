@@ -36,6 +36,7 @@
 ---@field syntax AuroraSyntax
 ---@field style StyleConfig
 ---@field comment Color
+---@field bg_accent Color
 
 ---@class AuroraSyntax
 ---@field keyword Color
@@ -82,6 +83,7 @@ function M.setup(colors, config)
   theme.fg2     = colors.fg2
 
   theme.comment = theme.fg2
+  theme.bg_accent = theme.bg2
 
   theme.ike     = colors.aqua
   theme.shinme  = colors.green
